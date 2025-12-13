@@ -142,7 +142,7 @@ echo -e "${GREEN}Created default config file...${RESET}"
 # -----------------------------
 echo -e "${CYAN}Creating start script...${RESET}"
 
-cat <<EOF > "$START_SCRIPT"
+cat <<'EOF' > "$START_SCRIPT"
 #!/bin/bash
 set -e
 
