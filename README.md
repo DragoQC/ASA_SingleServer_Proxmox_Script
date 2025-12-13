@@ -2,7 +2,7 @@
 
 This repository provides a **Bash script** to install and run **ARK: Survival Ascended** on Linux using **SteamCMD + Proton GE**, fully managed by **systemd**.
 
-The main objective is to run **one ARK ASA server per LXC container** in order to achieve:
+The main objective is to run **one ARK server per LXC container** in order to achieve:
 
 - 🧱 Clean isolation
 - 📉 Easy CPU / RAM / disk limits
@@ -26,7 +26,7 @@ This project is designed for **self-hosters**, **homelab setups**, and **Proxmox
 ## 🚀 Installation
 
 Run the installer directly:
-
+> Run it inside Debian 13 LXC
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/DragoQC/ASA_SingleServer_Proxmox_Script/main/asa-install-single-server.sh)"
 ```
