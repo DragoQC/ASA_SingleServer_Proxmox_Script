@@ -1,5 +1,7 @@
 # STILL IN DEVELOPPEMENT
 
+# WORKING but steamcmd sometimes dosent work need to run command twice
+
 # Run install using this : 
 
 	bash -c "$(curl -fsSL https://raw.githubusercontent.com/DragoQC/ASA_SingleServer_Proxmox_Script/main/asa-install-single-server.sh)"

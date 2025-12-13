@@ -186,7 +186,6 @@ exec "$PROTON_DIR/proton" run \
   -Port=$GAME_PORT \
   -QueryPort=$QUERY_PORT \
   -RCONPort=$RCON_PORT \
-  -NoBattlEye \
   -NoSteamClient \
   -NoSteam \
   -NoEOS \
