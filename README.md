@@ -136,14 +136,17 @@ Validate files
 Start again
 ```
 🛠️ Service Commands
-```text
-Start the server:
+
+- Start the server:
+```bash
 systemctl start asa
-
-Stop the server:
+```
+- Stop the server:
+```bash
 systemctl stop asa
-
-Restart the server:
+```
+- Restart the server:
+```bash
 systemctl restart asa
 ```
 
@@ -160,17 +163,14 @@ journalctl -u asa -f
 >Do not run multiple servers from the same install directory
 
 ❓ Why This Exists
-```text
-ARK ASA is Windows-only
-Proton works well
-Game panels overcomplicate simple infrastructure
-Linux deserves clean, scriptable tooling
-```
+- ARK ASA is Windows-only
+- Proton works well
+- Game panels overcomplicate simple infrastructure
+- Linux deserves clean, scriptable tooling
 
 ❤️ Credits
-```text
-Valve – SteamCMD
-GloriousEggroll – Proton GE
-Wildcard – ARK: Survival Ascended
-You – for hosting your own servers
-```
+- Valve – SteamCMD
+- GloriousEggroll – Proton GE
+- Wildcard – ARK: Survival Ascended
+- You – for hosting your own servers
+
