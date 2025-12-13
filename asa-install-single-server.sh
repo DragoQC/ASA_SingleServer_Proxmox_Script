@@ -47,7 +47,7 @@ dependencies=("wget" "tar" "grep" "libc6:i386" "libstdc++6:i386" "libncursesw6:i
 
 apt update
 apt install -y "${dependencies[@]}"
-echo -e "${CYAN}Installed dependencies...${RESET}"
+echo -e "${GREEN}Installed dependencies...${RESET}"
 
 # -------------------------------------------------------------------
 # Directories
@@ -57,8 +57,6 @@ mkdir -p "$STEAMCMD_DIR" "$SERVER_FILES_DIR" "$PROTON_DIR" "$CONFIG_DIR"
 # -------------------------------------------------------------------
 # SteamCMD
 # -------------------------------------------------------------------
-export HOME="$BASE_DIR"
-mkdir -p "$HOME/.steam"
 if [ ! -f "$STEAMCMD_DIR/steamcmd.sh" ]; then
     echo -e "${CYAN}Downloading SteamCMD...${RESET}"
     wget -q -O "$STEAMCMD_DIR/steamcmd_linux.tar.gz" "$STEAMCMD_URL"
@@ -85,35 +83,37 @@ fi
 # -------------------------------------------------------------------
 # ARK server install / update
 # -------------------------------------------------------------------
-echo -e "${CYAN}Installing/updating ARK server...${RESET}"
+echo -e "${CYAN}Installing ARK server...${RESET}"
+export HOME="$BASE_DIR"
+mkdir -p "$HOME/.steam"
 "$STEAMCMD_DIR/steamcmd.sh" \
   +force_install_dir "$SERVER_FILES_DIR" \
   +login anonymous \
   @sSteamCmdForcePlatformType windows \
   +app_update 2430930 validate \
   +quit
-
+echo -e "${GREEN}Installed ARK server...${RESET}"
 # -------------------------------------------------------------------
 # Proton prefix (one-time)
 # -------------------------------------------------------------------
+
 PROTON_PREFIX="$SERVER_FILES_DIR/steamapps/compatdata/2430930"
 
 if [ ! -d "$PROTON_PREFIX/pfx" ]; then
     echo -e "${CYAN}Initializing Proton prefix...${RESET}"
     mkdir -p "$PROTON_PREFIX"
     cp -r "$PROTON_DIR/files/share/default_pfx/." "$PROTON_PREFIX/"
+    echo -e "${CYAN}Initialized Proton prefix...${RESET}"
 else
     echo -e "${GREEN}Proton prefix already initialized.${RESET}"
 fi
 
 echo -e "${GREEN}Installation complete.${RESET}"
-echo
-echo -e "${CYAN}Next step:${RESET}"
-
 
 # -----------------------------
 # Create default config
 # -----------------------------
+echo -e "${CYAN}Creating default config file...${RESET}"
 if [ ! -f "$ENV_FILE" ]; then
 cat <<'EOF' > "$ENV_FILE"
 # ARK Survival Ascended configuration
@@ -137,10 +137,11 @@ CLUSTER_DIR=/opt/asa/cluster
 EXTRA_ARGS="-NoBattlEye -crossplay"
 EOF
 fi
-
+echo -e "${GREEN}Created default config file...${RESET}"
 # -----------------------------
 # Start script
 # -----------------------------
+echo -e "${CYAN}Creating start script...${RESET}"
 cat <<'EOF' > "$START_SCRIPT"
 #!/bin/bash
 set -e
@@ -204,10 +205,11 @@ exec "\$PROTON_DIR/proton" run \
 EOF
 
 chmod +x "$START_SCRIPT"
-
+echo -e "${CYAN}Created start script...${RESET}"
 # -----------------------------
 # systemd service
 # -----------------------------
+echo -e "${CYAN}Creating service...${RESET}"
 cat <<EOF > "$SERVICE_FILE"
 [Unit]
 Description=ARK Survival Ascended Server
@@ -225,6 +227,7 @@ KillSignal=SIGTERM
 [Install]
 WantedBy=multi-user.target
 EOF
+echo -e "${CYAN}Created service...${RESET}"
 
 # Reload systemd and enable service
 systemctl daemon-reexec
