@@ -131,15 +131,12 @@ systemctl restart asa
 The server will:
 ```text
 Stop
-
 Check for updates via SteamCMD
-
 Validate files
-
 Start again
 ```
 🛠️ Service Commands
-
+```text
 Start the server:
 systemctl start asa
 
@@ -148,41 +145,32 @@ systemctl stop asa
 
 Restart the server:
 systemctl restart asa
+```
 
 📜 Logs
-
+```text
 Check service status:
-
 systemctl status asa
-
 Follow live logs:
-
 journalctl -u asa -f
+```
 
 ⚠️ Notes
-
-Restarting the service can take 1–2 minutes due to SteamCMD checks
-
-Do not run multiple servers from the same install directory
-
-For clusters, never run two servers on the same map
+>Restarting the service can take 1–2 minutes due to SteamCMD checks
+>Do not run multiple servers from the same install directory
 
 ❓ Why This Exists
-
+```text
 ARK ASA is Windows-only
-
 Proton works well
-
 Game panels overcomplicate simple infrastructure
-
 Linux deserves clean, scriptable tooling
+```
 
 ❤️ Credits
-
+```text
 Valve – SteamCMD
-
 GloriousEggroll – Proton GE
-
 Wildcard – ARK: Survival Ascended
-
 You – for hosting your own servers
+```
