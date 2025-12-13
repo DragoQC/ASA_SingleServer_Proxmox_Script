@@ -105,8 +105,9 @@ echo -e "${CYAN}Next step:${RESET}"
 # -----------------------------
 # Create default config
 # -----------------------------
+mkdir -p "$CONFIG_DIR"
 if [ ! -f "$ENV_FILE" ]; then
-cat <<EOF > "$ENV_FILE"
+cat <<'EOF' > "$ENV_FILE"
 # ARK Survival Ascended configuration
 
 MAP_NAME=TheIsland_WP
@@ -132,7 +133,7 @@ fi
 # -----------------------------
 # Start script
 # -----------------------------
-cat <<EOF > "$START_SCRIPT"
+cat <<'EOF' > "$START_SCRIPT"
 #!/bin/bash
 set -e
 
