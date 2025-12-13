@@ -14,8 +14,8 @@ BLUE='\e[34m'
 MAGENTA='\e[35m'
 CYAN='\e[36m'
 RESET='\e[0m'
-SERVICE_NAME="asa"
 
+SERVICE_NAME="asa"
 
 # Base directory for all instances
 BASE_DIR="/opt/asa"
@@ -86,8 +86,6 @@ if [ ! -d "$PROTON_DIR/files" ]; then
 else
     echo -e "${GREEN}Proton already installed.${RESET}"
 fi
-
-
 
 # -------------------------------------------------------------------
 # ARK server install / update
