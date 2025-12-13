@@ -87,9 +87,9 @@ echo -e "${CYAN}Installing ARK server...${RESET}"
 export HOME="$BASE_DIR"
 mkdir -p "$HOME/.steam"
 "$STEAMCMD_DIR/steamcmd.sh" \
+  +@sSteamCmdForcePlatformType windows \
   +force_install_dir "$SERVER_FILES_DIR" \
   +login anonymous \
-  @sSteamCmdForcePlatformType windows \
   +app_update 2430930 validate \
   +quit
 echo -e "${GREEN}Installed ARK server...${RESET}"
