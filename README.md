@@ -38,6 +38,7 @@
 	One simple config file for users
 
 📁 Directory Layout
+
 /opt/asa/
 ├── start-asa.sh              # Server start wrapper (used by systemd)
 ├── customconfig/
