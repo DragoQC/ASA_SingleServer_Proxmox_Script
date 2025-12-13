@@ -179,7 +179,7 @@ export STEAM_COMPAT_CLIENT_INSTALL_PATH="$BASE_DIR"
 # -----------------------------
 MOD_ARG=""
 if [ -n "$MOD_IDS" ]; then
-  MOD_ARG="-mods=$MOD_IDS"
+  MOD_ARG="-Mods=$MOD_IDS"
 fi
 
 # -----------------------------
@@ -192,15 +192,13 @@ exec "$PROTON_DIR/proton" run \
   -Port=$GAME_PORT \
   -QueryPort=$QUERY_PORT \
   -RCONPort=$RCON_PORT \
-  -NoSteamClient \
-  -NoSteam \
+	$MOD_ARG \
   -NoEOS \
   -nullrhi \
   -nosound \
   -NoSplash \
   -log \
   -server \
-  -nosteamclient \
   -game	
 EOF
 
