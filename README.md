@@ -106,9 +106,8 @@ Restart the server:
 	Players can upload/download characters, dinos, and items between maps.
 	🔄 Updating the Server
 	No special command needed.
-	Every time you run:
-	systemctl restart asa
 
+Every time you run systemctl restart asa
 The server will:
 
 	Stop
