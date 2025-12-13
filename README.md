@@ -67,38 +67,38 @@
 
 Example config:
 
-MAP_NAME=TheIsland_WP
-SERVER_NAME=ARK ASA Server
-MAX_PLAYERS=20
-
-GAME_PORT=7777
-QUERY_PORT=27015
-RCON_PORT=27020
-
-MOD_IDS=123456789,987654321
-
-#Cluster (optional)
-CLUSTER_ID=
-CLUSTER_DIR=/opt/asa/cluster
-
-EXTRA_ARGS="-NoBattlEye -crossplay"
+	MAP_NAME=TheIsland_WP
+	SERVER_NAME=ARK ASA Server
+	MAX_PLAYERS=20
+	GAME_PORT=7777
+	QUERY_PORT=27015
+	RCON_PORT=27020
+	MOD_IDS=123456789,987654321
+	#Cluster (optional)
+	CLUSTER_ID=
+	CLUSTER_DIR=/opt/asa/cluster
+	EXTRA_ARGS="-NoBattlEye -crossplay"
 
 
 👉 After editing, apply changes with:
+
 	systemctl restart asa
 
 🧬 Cluster Support (Optional)
+
 	Cluster is disabled by default.
 	To enable clustering:
 	Mount the same shared folder into every server machine:
 	/opt/asa/cluster
 
 Edit asa.env:
-CLUSTER_ID=mycluster
-CLUSTER_DIR=/opt/asa/cluster
+
+	CLUSTER_ID=mycluster
+	CLUSTER_DIR=/opt/asa/cluster
 
 Restart the server:
-systemctl restart asa
+
+	systemctl restart asa
 
 
 🦖 Result:
