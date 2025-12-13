@@ -163,18 +163,6 @@ if [ -n "$CLUSTER_ID" ]; then
 fi
 
 # -----------------------------
-# Auto-update ASA before start
-# -----------------------------
-if [ -f "$STEAMCMD_DIR/steamcmd.sh" ]; then
-  echo "[ASA] Checking for updates via SteamCMD..."
-  "$STEAMCMD_DIR/steamcmd.sh" \
-    +force_install_dir "$SERVER_FILES_DIR" \
-    +login anonymous \
-    +app_update 2430930 validate \
-    +quit
-fi
-
-# -----------------------------
 # Proton environment
 # -----------------------------
 export STEAM_COMPAT_DATA_PATH="$SERVER_FILES_DIR/steamapps/compatdata/2430930"
@@ -218,6 +206,7 @@ After=network.target
 [Service]
 Type=simple
 WorkingDirectory=/opt/asa
+ExecStartPre=/opt/asa/steamcmd/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir /opt/asa/server-files +login anonymous +app_update 2430930 validate +quit
 ExecStart=/opt/asa/start-asa.sh
 Restart=on-failure
 RestartSec=10
