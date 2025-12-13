@@ -148,9 +148,9 @@ set -e
 source /opt/asa/customconfig/asa.env
 
 BASE_DIR="/opt/asa"
-SERVER_FILES_DIR="\$BASE_DIR/server-files"
-STEAMCMD_DIR="\$BASE_DIR/steamcmd"
-PROTON_DIR="\$BASE_DIR/$PROTON_VERSION"
+SERVER_FILES_DIR="$BASE_DIR/server-files"
+STEAMCMD_DIR="$BASE_DIR/steamcmd"
+PROTON_DIR="$BASE_DIR/GE-Proton10-4"
 
 # -----------------------------
 # Optional cluster support
@@ -167,7 +167,7 @@ fi
 if [ -f "\$STEAMCMD_DIR/steamcmd.sh" ]; then
   echo "[ASA] Checking for updates via SteamCMD..."
   "\$STEAMCMD_DIR/steamcmd.sh" \
-    +force_install_dir "\$SERVER_FILES_DIR" \
+    +force_install_dir "$SERVER_FILES_DIR" \
     +login anonymous \
     +app_update 2430930 validate \
     +quit
@@ -176,8 +176,8 @@ fi
 # -----------------------------
 # Proton environment
 # -----------------------------
-export STEAM_COMPAT_DATA_PATH="\$SERVER_FILES_DIR/steamapps/compatdata/2430930"
-export STEAM_COMPAT_CLIENT_INSTALL_PATH="\$BASE_DIR"
+export STEAM_COMPAT_DATA_PATH="$SERVER_FILES_DIR/steamapps/compatdata/2430930"
+export STEAM_COMPAT_CLIENT_INSTALL_PATH="$BASE_DIR"
 
 # -----------------------------
 # Mods
@@ -190,8 +190,8 @@ fi
 # -----------------------------
 # Start server (PID belongs to systemd)
 # -----------------------------
-exec "\$PROTON_DIR/proton" run \
-  "\$SERVER_FILES_DIR/ShooterGame/Binaries/Win64/ArkAscendedServer.exe" \
+exec "$PROTON_DIR/proton" run \
+  "$SERVER_FILES_DIR/ShooterGame/Binaries/Win64/ArkAscendedServer.exe" \
   "\$MAP_NAME?listen?SessionName=\$SERVER_NAME?RCONEnabled=True" \
   -WinLiveMaxPlayers=\$MAX_PLAYERS \
   -Port=\$GAME_PORT \
