@@ -36,12 +36,12 @@ PROTON_DIR="$BASE_DIR/$PROTON_VERSION"
 STEAMCMD_URL="https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz"
 PROTON_URL="https://github.com/GloriousEggroll/proton-ge-custom/releases/download/$PROTON_VERSION/$PROTON_VERSION.tar.gz"
 
-echo -e "${CYAN}== ARK Survival Ascended installer (single server) ==${RESET}"
+echo -e "${BLUE}== ARK Survival Ascended installer (single server) ==${RESET}"
 
 # -------------------------------------------------------------------
 # Dependencies
 # -------------------------------------------------------------------
-echo -e "${CYAN}Installing dependencies...${RESET}"
+echo -e "${MAGENTA}Installing dependencies...${RESET}"
 dpkg --add-architecture i386
 dependencies=("wget" "tar" "grep" "libc6:i386" "libstdc++6:i386" "libncursesw6:i386" "python3" "libfreetype6:i386" "libfreetype6:amd64" "cron")
 
@@ -78,7 +78,7 @@ fi
 # Proton GE
 # -------------------------------------------------------------------
 if [ ! -d "$PROTON_DIR/files" ]; then
-    echo -e "${CYAN}Downloading Proton GE...${RESET}"
+    echo -e "${YELLOW}Downloading Proton GE...${RESET}"
     wget -q -O "$PROTON_DIR/$PROTON_VERSION.tar.gz" "$PROTON_URL"
     tar -xzf "$PROTON_DIR/$PROTON_VERSION.tar.gz" -C "$PROTON_DIR" --strip-components=1
     rm "$PROTON_DIR/$PROTON_VERSION.tar.gz"
