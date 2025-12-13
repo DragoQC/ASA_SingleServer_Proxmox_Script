@@ -41,13 +41,13 @@ echo -e "${CYAN}== ARK Survival Ascended installer (single server) ==${RESET}"
 # -------------------------------------------------------------------
 # Dependencies
 # -------------------------------------------------------------------
-
+echo -e "${CYAN}Installing dependencies...${RESET}"
 dpkg --add-architecture i386
 dependencies=("wget" "tar" "grep" "libc6:i386" "libstdc++6:i386" "libncursesw6:i386" "python3" "libfreetype6:i386" "libfreetype6:amd64" "cron")
 
 apt update
 apt install -y "${dependencies[@]}"
-
+echo -e "${CYAN}Installed dependencies...${RESET}"
 
 # -------------------------------------------------------------------
 # Directories
@@ -64,6 +64,7 @@ if [ ! -f "$STEAMCMD_DIR/steamcmd.sh" ]; then
     wget -q -O "$STEAMCMD_DIR/steamcmd_linux.tar.gz" "$STEAMCMD_URL"
     tar -xzf "$STEAMCMD_DIR/steamcmd_linux.tar.gz" -C "$STEAMCMD_DIR"
     rm "$STEAMCMD_DIR/steamcmd_linux.tar.gz"
+		echo -e "${GREEN}Installed SteamCMD...${RESET}"
 else
     echo -e "${GREEN}SteamCMD already installed.${RESET}"
 fi
@@ -76,6 +77,7 @@ if [ ! -d "$PROTON_DIR/files" ]; then
     wget -q -O "$PROTON_DIR/$PROTON_VERSION.tar.gz" "$PROTON_URL"
     tar -xzf "$PROTON_DIR/$PROTON_VERSION.tar.gz" -C "$PROTON_DIR" --strip-components=1
     rm "$PROTON_DIR/$PROTON_VERSION.tar.gz"
+		echo -e "${GREEN}Installed Proton GE...${RESET}"
 else
     echo -e "${GREEN}Proton already installed.${RESET}"
 fi
