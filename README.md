@@ -1,169 +1,184 @@
-# STILL IN DEVELOPPEMENT
+# 🦖 ARK: Survival Ascended – Single Server Installer (Proxmox / LXC)
 
-# WORKING but steamcmd sometimes dosent work need to run command twice
+This repository provides a **Bash script** to install and run **ARK: Survival Ascended** on Linux using **SteamCMD + Proton GE**, fully managed by **systemd**.
 
-# Run install using this : 
+The main objective is to run **one ARK ASA server per LXC container** in order to achieve:
 
-	bash -c "$(curl -fsSL https://raw.githubusercontent.com/DragoQC/ASA_SingleServer_Proxmox_Script/main/asa-install-single-server.sh)"
+- 🧱 Clean isolation
+- 📉 Easy CPU / RAM / disk limits
+- 💾 Predictable disk usage (less than 10 GB per server)
+- 📦 Simple scaling on Proxmox
 
+This project is designed for **self-hosters**, **homelab setups**, and **Proxmox users**.
 
-🦖 ARK Survival Ascended – Linux Server Installer (Systemd + Proton)
+---
 
-	One server. One LXC.
-	Install, update, and run ARK Survival Ascended on Linux using SteamCMD + Proton GE, fully managed by systemd.
-	This script is designed for self-hosters, homelabbers, and cluster admins who want a clean, reliable, and scalable setup.
+## ✅ Requirements
 
-✨ Features
+- 🐧 **Debian 13**
+- 🌐 **curl** installed
+- 🖥️ **Proxmox** (tested)
+- 📦 **Debian 13 LXC container** (tested)
 
-	🦕 Single-server design
-	One ARK server per machine / LXC
-	Clean isolation, easy resource limits
+⚠️ Each LXC container must host **only one ARK server**.
 
-⚙️ Systemd managed
+---
 
-	systemctl start | stop | restart asa
-	Automatic restarts on crash
-	Logs via journalctl
+## 🚀 Installation
 
-🔄 Auto-update on restart
+Run the installer directly:
 
-	Server updates itself every time you restart the service
-	No manual SteamCMD runs needed
+```bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/DragoQC/ASA_SingleServer_Proxmox_Script/main/asa-install-single-server.sh)"
+```
 
-🧬 Optional cluster support
+> ℹ️ **Note**  
+> SteamCMD may occasionally fail on the first run.  
+> If that happens, simply run the command again.
 
-	Enable cluster later without reinstalling
-	Works across multiple machines
-	Shared cluster folder via mount / bind
+---
 
-🧩 Mod support
+## ✨ Features
 
-	Mods passed via command-line (-mods=)
-	Change mods → restart service → done
+- One server per LXC
+- systemd managed service
+- Automatic restart on crash
+- Automatic update on service restart
+- Optional cluster support
+- Mod support via command-line
+- Clean and simple file layout
+- Example `Game.ini` and `GameUserSettings.ini` included
 
-📦 Clean file layout
+---
 
-	Everything lives in /opt/asa
-	One simple config file for users
+## 📁 Directory Layout
 
-📁 Directory Layout
-
+```text
 /opt/asa/
-├── start-asa.sh              # Server start wrapper (used by systemd)
-├── customconfig/
-│   └── asa.env               # MAIN CONFIG FILE (edit this)
-├── server-files/             # ARK server files (SteamCMD)
-├── steamcmd/                 # SteamCMD
-├── GE-Proton10-4/             # Proton GE
-└── cluster/                  # (Optional) Cluster shared folder
+├── start-asa.sh
+├── server-config/
+│   └── asa.env
+├── server-files/
+├── steamcmd/
+├── GE-Proton10-4/
+└── cluster/
+```
 
-🚀 Installation
+## ⚙️ Configuration
 
-	1️⃣ Clone or copy the installer script
-		git clone https://github.com/yourname/asa-linux-installer.git
-		cd asa-linux-installer
+All user configuration is done in:
 
-	2️⃣ Run the installer
-		sudo ./install-asa.sh
+```bash
+/opt/asa/server-config/asa.env
+```
 
-	That’s it.
-	The server will install, configure, enable systemd, and start automatically.
+### Example
 
-⚙️ Configuration (Important)
+```env
+MAP_NAME=TheIsland_WP
+SERVER_NAME=ARK ASA Server
+MAX_PLAYERS=20
 
-	All user-editable settings are in:
-	/opt/asa/customconfig/asa.env
+GAME_PORT=7777
+QUERY_PORT=27015
+RCON_PORT=27020
 
-Example config:
+MOD_IDS=123456789,987654321
 
-	MAP_NAME=TheIsland_WP
-	SERVER_NAME=ARK ASA Server
-	MAX_PLAYERS=20
-	GAME_PORT=7777
-	QUERY_PORT=27015
-	RCON_PORT=27020
-	MOD_IDS=123456789,987654321
-	#Cluster (optional)
-	CLUSTER_ID=
-	CLUSTER_DIR=/opt/asa/cluster
-	EXTRA_ARGS="-NoBattlEye -crossplay"
+CLUSTER_ID=
+CLUSTER_DIR=/opt/asa/cluster
+
+EXTRA_ARGS="-NoBattlEye -crossplay"
+```
 
 
-👉 After editing, apply changes with:
+Apply changes:
 
-	systemctl restart asa
+systemctl restart asa
 
-🧬 Cluster Support (Optional)
+Cluster Support (Optional)
 
-	Cluster is disabled by default.
-	To enable clustering:
-	Mount the same shared folder into every server machine:
-	/opt/asa/cluster
+Cluster is disabled by default.
 
-Edit asa.env:
+To enable it:
 
-	CLUSTER_ID=mycluster
-	CLUSTER_DIR=/opt/asa/cluster
+Mount the same shared directory on each server:
 
-Restart the server:
-
-	systemctl restart asa
+/opt/asa/cluster
 
 
-🦖 Result:
+Set in asa.env:
 
-	Players can upload/download characters, dinos, and items between maps.
-	🔄 Updating the Server
-	No special command needed.
+CLUSTER_ID=mycluster
+CLUSTER_DIR=/opt/asa/cluster
 
-Every time you run systemctl restart asa
+
+Restart the service:
+
+systemctl restart asa
+
+
+Players will be able to transfer characters, dinos, and items between maps.
+
+Updating the Server
+
+No manual update command is required.
+
+Every time you run:
+
+systemctl restart asa
+
+
 The server will:
 
-	Stop
-	Check for updates via SteamCMD
-	Validate files
-	Start again
+Stop
 
-🧾 Logs & Status
+Check for updates via SteamCMD
 
-	Check server status
-	systemctl status asa
-	Follow live logs
-	journalctl -u asa -f
+Validate files
 
-🛑 Stop / Start / Restart
+Start again
 
-	systemctl stop asa
-	systemctl start asa
-	systemctl restart asa
+Service Commands
+systemctl start asa
+systemctl stop asa
+systemctl restart asa
 
-🧠 Design Philosophy
+Logs
 
-	✔ Simple over clever
-	✔ One server = one process
-	✔ No tmux / screen / pkill hacks
-	✔ systemd owns the PID
-	✔ Easy to migrate, backup, and scale
+Check status:
 
-This is not a panel.
-This is infrastructure.
+systemctl status asa
 
-⚠️ Notes & Warnings
 
-	Restarting the service may take 1–2 minutes (SteamCMD update check)
-	Do not run multiple servers using the same install directory
-	For clusters, never run two servers on the same map
+Follow logs:
 
-🦖 Why this exists
+journalctl -u asa -f
 
-	ARK ASA is Windows-only
-	Proton works
-	Panels overcomplicate things
-	Linux deserves better tooling
+Notes
 
-❤️ Credits
+Restarting the service can take 1–2 minutes due to SteamCMD checks
 
-	Valve – SteamCMD
-	GloriousEggroll – Proton GE
-	Wildcard – ARK Survival Ascended
-	You – for hosting your own damn servers 🦕
+Do not run multiple servers from the same install directory
+
+For clusters, never run two servers on the same map
+
+Why This Exists
+
+ARK ASA is Windows-only
+
+Proton works well
+
+Game panels overcomplicate simple infrastructure
+
+Linux deserves clean, scriptable tooling
+
+Credits
+
+Valve – SteamCMD
+
+GloriousEggroll – Proton GE
+
+Wildcard – ARK: Survival Ascended
+
+You – for hosting your own servers

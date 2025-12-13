@@ -21,7 +21,7 @@ SERVICE_NAME="asa"
 BASE_DIR="/opt/asa"
 RCON_SCRIPT="$BASE_DIR/rcon.py"
 
-CONFIG_DIR="$BASE_DIR/customconfig"
+CONFIG_DIR="$BASE_DIR/server-config"
 ENV_FILE="$CONFIG_DIR/asa.env"
 START_SCRIPT="$BASE_DIR/start-asa.sh"
 SERVICE_FILE="/etc/systemd/system/asa.service"
@@ -152,7 +152,7 @@ cat <<'EOF' > "$START_SCRIPT"
 #!/bin/bash
 set -e
 
-source /opt/asa/customconfig/asa.env
+source /opt/asa/server-config/asa.env
 
 BASE_DIR="/opt/asa"
 SERVER_FILES_DIR="$BASE_DIR/server-files"
