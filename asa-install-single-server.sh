@@ -67,6 +67,13 @@ else
     echo -e "${GREEN}SteamCMD already installed.${RESET}"
 fi
 
+if [ ! -f "$STEAMCMD_DIR/.bootstrapped" ]; then
+    echo -e "${CYAN}Initializing SteamCMD (first run)...${RESET}"
+    "$STEAMCMD_DIR/steamcmd.sh" +quit
+    touch "$STEAMCMD_DIR/.bootstrapped"
+		echo -e "${CYAN}Initialized SteamCMD (first run)...${RESET}"
+fi
+
 # -------------------------------------------------------------------
 # Proton GE
 # -------------------------------------------------------------------
