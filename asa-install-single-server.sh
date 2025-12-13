@@ -186,10 +186,17 @@ exec "$PROTON_DIR/proton" run \
   -Port=$GAME_PORT \
   -QueryPort=$QUERY_PORT \
   -RCONPort=$RCON_PORT \
-  $EXTRA_ARGS \
-  $MOD_ARG \
-	$CLUSTER_ARGS \
-  -server -log -nosteamclient -game
+  -NoBattlEye \
+  -NoSteamClient \
+  -NoSteam \
+  -NoEOS \
+  -nullrhi \
+  -nosound \
+  -NoSplash \
+  -log \
+  -server \
+  -nosteamclient \
+  -game	
 EOF
 
 chmod +x "$START_SCRIPT"
