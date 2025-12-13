@@ -57,6 +57,8 @@ mkdir -p "$STEAMCMD_DIR" "$SERVER_FILES_DIR" "$PROTON_DIR" "$CONFIG_DIR"
 # -------------------------------------------------------------------
 # SteamCMD
 # -------------------------------------------------------------------
+export HOME="$BASE_DIR"
+mkdir -p "$HOME/.steam"
 if [ ! -f "$STEAMCMD_DIR/steamcmd.sh" ]; then
     echo -e "${CYAN}Downloading SteamCMD...${RESET}"
     wget -q -O "$STEAMCMD_DIR/steamcmd_linux.tar.gz" "$STEAMCMD_URL"
@@ -88,7 +90,7 @@ echo -e "${CYAN}Installing/updating ARK server...${RESET}"
   @sSteamCmdForcePlatformType windows \
   +app_update 2430930 validate \
   +quit
-	
+
 # -------------------------------------------------------------------
 # Proton prefix (one-time)
 # -------------------------------------------------------------------
