@@ -17,7 +17,6 @@ This project is designed for **self-hosters**, **homelab setups**, and **Proxmox
 
 - 🐧 **Debian 13**
 - 🌐 **curl** installed
-- 🖥️ **Proxmox** (tested)
 - 📦 **Debian 13 LXC container** (tested)
 
 ⚠️ Each LXC container must host **only one ARK server**.
@@ -76,61 +75,61 @@ All user configuration is done in:
 
 ```env
 MAP_NAME=TheIsland_WP
-SERVER_NAME=ARK ASA Server
+SERVER_NAME="ARK ASA Server"
 MAX_PLAYERS=20
 
 GAME_PORT=7777
 QUERY_PORT=27015
 RCON_PORT=27020
 
-MOD_IDS=123456789,987654321
+MOD_IDS="123456789,987654321"
 
-CLUSTER_ID=
-CLUSTER_DIR=/opt/asa/cluster
+CLUSTER_ID=""
+CLUSTER_DIR="/opt/asa/cluster"
 
 EXTRA_ARGS="-NoBattlEye -crossplay"
 ```
+---
 
+### Apply changes
 
-Apply changes:
-
+Run the following command:
+```bash
 systemctl restart asa
+```
 
-Cluster Support (Optional)
+🧬 Cluster Support (Optional)
 
-Cluster is disabled by default.
+Cluster support is disabled by default.
 
-To enable it:
+To enable it
 
 Mount the same shared directory on each server:
-
+```bash
 /opt/asa/cluster
-
-
-Set in asa.env:
-
+```
+Edit asa.env and set:
+```bash
 CLUSTER_ID=mycluster
+
 CLUSTER_DIR=/opt/asa/cluster
-
-
+```
 Restart the service:
-
+```bash
 systemctl restart asa
-
-
+```
 Players will be able to transfer characters, dinos, and items between maps.
 
-Updating the Server
+🔄 Updating the Server
 
 No manual update command is required.
 
 Every time you run:
-
+```bash
 systemctl restart asa
-
-
+```
 The server will:
-
+```text
 Stop
 
 Check for updates via SteamCMD
@@ -138,24 +137,29 @@ Check for updates via SteamCMD
 Validate files
 
 Start again
+```
+🛠️ Service Commands
 
-Service Commands
+Start the server:
 systemctl start asa
+
+Stop the server:
 systemctl stop asa
+
+Restart the server:
 systemctl restart asa
 
-Logs
+📜 Logs
 
-Check status:
+Check service status:
 
 systemctl status asa
 
-
-Follow logs:
+Follow live logs:
 
 journalctl -u asa -f
 
-Notes
+⚠️ Notes
 
 Restarting the service can take 1–2 minutes due to SteamCMD checks
 
@@ -163,7 +167,7 @@ Do not run multiple servers from the same install directory
 
 For clusters, never run two servers on the same map
 
-Why This Exists
+❓ Why This Exists
 
 ARK ASA is Windows-only
 
@@ -173,7 +177,7 @@ Game panels overcomplicate simple infrastructure
 
 Linux deserves clean, scriptable tooling
 
-Credits
+❤️ Credits
 
 Valve – SteamCMD
 
