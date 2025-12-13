@@ -103,12 +103,10 @@ if [ ! -d "$PROTON_PREFIX/pfx" ]; then
     echo -e "${CYAN}Initializing Proton prefix...${RESET}"
     mkdir -p "$PROTON_PREFIX"
     cp -r "$PROTON_DIR/files/share/default_pfx/." "$PROTON_PREFIX/"
-    echo -e "${CYAN}Initialized Proton prefix...${RESET}"
+    echo -e "${GREEN}Initialized Proton prefix...${RESET}"
 else
     echo -e "${GREEN}Proton prefix already initialized.${RESET}"
 fi
-
-echo -e "${GREEN}Installation complete.${RESET}"
 
 # -----------------------------
 # Create default config
@@ -119,7 +117,7 @@ cat <<'EOF' > "$ENV_FILE"
 # ARK Survival Ascended configuration
 
 MAP_NAME=TheIsland_WP
-SERVER_NAME=ARK ASA Server
+SERVER_NAME="ARK ASA Server"
 MAX_PLAYERS=20
 
 GAME_PORT=7777
@@ -127,11 +125,11 @@ QUERY_PORT=27015
 RCON_PORT=27020
 
 # Comma-separated mod IDs
-MOD_IDS=
+MOD_IDS=""
 
 # Cluster (Optional Set cluster ID when ready to use)
-CLUSTER_ID=
-CLUSTER_DIR=/opt/asa/cluster
+CLUSTER_ID=""
+CLUSTER_DIR="/opt/asa/cluster"
 
 # Extra flags
 EXTRA_ARGS="-NoBattlEye -crossplay"
