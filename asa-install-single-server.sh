@@ -190,15 +190,19 @@ exec "$PROTON_DIR/proton" run \
   "$MAP_NAME?listen?SessionName=$SERVER_NAME?RCONEnabled=True" \
   -WinLiveMaxPlayers=$MAX_PLAYERS \
   -Port=$GAME_PORT \
+  $MOD_ARG \
   -QueryPort=$QUERY_PORT \
   -RCONPort=$RCON_PORT \
-	$MOD_ARG \
+  -NoSteamClient \
+  -NoSteam \
+  -NoEOS \
   -nullrhi \
-  -nographics \
   -nosound \
   -NoSplash \
   -log \
-  -server
+  -server \
+  -nosteamclient \
+  -game	
 EOF
 
 chmod +x "$START_SCRIPT"
