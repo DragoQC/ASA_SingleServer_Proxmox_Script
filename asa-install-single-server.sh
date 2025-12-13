@@ -141,7 +141,8 @@ echo -e "${GREEN}Created default config file...${RESET}"
 # Start script
 # -----------------------------
 echo -e "${CYAN}Creating start script...${RESET}"
-cat <<'EOF' > "$START_SCRIPT"
+
+cat <<EOF > "$START_SCRIPT"
 #!/bin/bash
 set -e
 
@@ -156,17 +157,17 @@ PROTON_DIR="$BASE_DIR/GE-Proton10-4"
 # Optional cluster support
 # -----------------------------
 CLUSTER_ARGS=""
-if [ -n "\$CLUSTER_ID" ]; then
-  mkdir -p "\$CLUSTER_DIR"
-  CLUSTER_ARGS="-ClusterDirOverride=\$CLUSTER_DIR -ClusterId=\$CLUSTER_ID"
+if [ -n "$CLUSTER_ID" ]; then
+  mkdir -p "$CLUSTER_DIR"
+  CLUSTER_ARGS="-ClusterDirOverride=$CLUSTER_DIR -ClusterId=$CLUSTER_ID"
 fi
 
 # -----------------------------
 # Auto-update ASA before start
 # -----------------------------
-if [ -f "\$STEAMCMD_DIR/steamcmd.sh" ]; then
+if [ -f "$STEAMCMD_DIR/steamcmd.sh" ]; then
   echo "[ASA] Checking for updates via SteamCMD..."
-  "\$STEAMCMD_DIR/steamcmd.sh" \
+  "$STEAMCMD_DIR/steamcmd.sh" \
     +force_install_dir "$SERVER_FILES_DIR" \
     +login anonymous \
     +app_update 2430930 validate \
@@ -183,8 +184,8 @@ export STEAM_COMPAT_CLIENT_INSTALL_PATH="$BASE_DIR"
 # Mods
 # -----------------------------
 MOD_ARG=""
-if [ -n "\$MOD_IDS" ]; then
-  MOD_ARG="-mods=\$MOD_IDS"
+if [ -n "$MOD_IDS" ]; then
+  MOD_ARG="-mods=$MOD_IDS"
 fi
 
 # -----------------------------
@@ -192,14 +193,14 @@ fi
 # -----------------------------
 exec "$PROTON_DIR/proton" run \
   "$SERVER_FILES_DIR/ShooterGame/Binaries/Win64/ArkAscendedServer.exe" \
-  "\$MAP_NAME?listen?SessionName=\$SERVER_NAME?RCONEnabled=True" \
-  -WinLiveMaxPlayers=\$MAX_PLAYERS \
-  -Port=\$GAME_PORT \
-  -QueryPort=\$QUERY_PORT \
-  -RCONPort=\$RCON_PORT \
-  \$EXTRA_ARGS \
-  \$MOD_ARG \
-	\$CLUSTER_ARGS \
+  "$MAP_NAME?listen?SessionName=$SERVER_NAME?RCONEnabled=True" \
+  -WinLiveMaxPlayers=$MAX_PLAYERS \
+  -Port=$GAME_PORT \
+  -QueryPort=$QUERY_PORT \
+  -RCONPort=$RCON_PORT \
+  $EXTRA_ARGS \
+  $MOD_ARG \
+	$CLUSTER_ARGS \
   -server -log -nosteamclient -game
 EOF
 
