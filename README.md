@@ -61,10 +61,12 @@
 	The server will install, configure, enable systemd, and start automatically.
 
 ⚙️ Configuration (Important)
+
 	All user-editable settings are in:
 	/opt/asa/customconfig/asa.env
 
 Example config:
+
 MAP_NAME=TheIsland_WP
 SERVER_NAME=ARK ASA Server
 MAX_PLAYERS=20
@@ -75,7 +77,7 @@ RCON_PORT=27020
 
 MOD_IDS=123456789,987654321
 
-# Cluster (optional)
+#Cluster (optional)
 CLUSTER_ID=
 CLUSTER_DIR=/opt/asa/cluster
 
@@ -100,6 +102,7 @@ systemctl restart asa
 
 
 🦖 Result:
+
 	Players can upload/download characters, dinos, and items between maps.
 	🔄 Updating the Server
 	No special command needed.
@@ -107,23 +110,27 @@ systemctl restart asa
 	systemctl restart asa
 
 The server will:
+
 	Stop
 	Check for updates via SteamCMD
 	Validate files
 	Start again
 
 🧾 Logs & Status
+
 	Check server status
 	systemctl status asa
 	Follow live logs
 	journalctl -u asa -f
 
 🛑 Stop / Start / Restart
+
 	systemctl stop asa
 	systemctl start asa
 	systemctl restart asa
 
 🧠 Design Philosophy
+
 	✔ Simple over clever
 	✔ One server = one process
 	✔ No tmux / screen / pkill hacks
@@ -134,18 +141,20 @@ This is not a panel.
 This is infrastructure.
 
 ⚠️ Notes & Warnings
+
 	Restarting the service may take 1–2 minutes (SteamCMD update check)
 	Do not run multiple servers using the same install directory
 	For clusters, never run two servers on the same map
 
 🦖 Why this exists
-Because:
+
 	ARK ASA is Windows-only
 	Proton works
 	Panels overcomplicate things
 	Linux deserves better tooling
 
 ❤️ Credits
+
 	Valve – SteamCMD
 	GloriousEggroll – Proton GE
 	Wildcard – ARK Survival Ascended
