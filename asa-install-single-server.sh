@@ -205,7 +205,7 @@ exec "\$PROTON_DIR/proton" run \
 EOF
 
 chmod +x "$START_SCRIPT"
-echo -e "${CYAN}Created start script...${RESET}"
+echo -e "${GREEN}Created start script...${RESET}"
 # -----------------------------
 # systemd service
 # -----------------------------
@@ -227,7 +227,7 @@ KillSignal=SIGTERM
 [Install]
 WantedBy=multi-user.target
 EOF
-echo -e "${CYAN}Created service...${RESET}"
+echo -e "${GREEN}Created service...${RESET}"
 
 # Reload systemd and enable service
 systemctl daemon-reexec
