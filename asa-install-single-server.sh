@@ -193,13 +193,12 @@ exec "$PROTON_DIR/proton" run \
   -QueryPort=$QUERY_PORT \
   -RCONPort=$RCON_PORT \
 	$MOD_ARG \
-  -NoEOS \
   -nullrhi \
+  -nographics \
   -nosound \
   -NoSplash \
   -log \
-  -server \
-  -game	
+  -server
 EOF
 
 chmod +x "$START_SCRIPT"
