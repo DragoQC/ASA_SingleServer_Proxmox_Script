@@ -1,32 +1,39 @@
 🦖 ARK Survival Ascended – Linux Server Installer (Systemd + Proton)
+
 	One server. One LXC.
 	Install, update, and run ARK Survival Ascended on Linux using SteamCMD + Proton GE, fully managed by systemd.
 	This script is designed for self-hosters, homelabbers, and cluster admins who want a clean, reliable, and scalable setup.
 
 ✨ Features
+
 	🦕 Single-server design
 	One ARK server per machine / LXC
 	Clean isolation, easy resource limits
 
 ⚙️ Systemd managed
+
 	systemctl start | stop | restart asa
 	Automatic restarts on crash
 	Logs via journalctl
 
 🔄 Auto-update on restart
+
 	Server updates itself every time you restart the service
 	No manual SteamCMD runs needed
 
 🧬 Optional cluster support
+
 	Enable cluster later without reinstalling
 	Works across multiple machines
 	Shared cluster folder via mount / bind
 
 🧩 Mod support
+
 	Mods passed via command-line (-mods=)
 	Change mods → restart service → done
 
 📦 Clean file layout
+
 	Everything lives in /opt/asa
 	One simple config file for users
 
@@ -41,6 +48,7 @@
 └── cluster/                  # (Optional) Cluster shared folder
 
 🚀 Installation
+
 	1️⃣ Clone or copy the installer script
 		git clone https://github.com/yourname/asa-linux-installer.git
 		cd asa-linux-installer
