@@ -52,7 +52,7 @@ apt install -y "${dependencies[@]}"
 # -------------------------------------------------------------------
 # Directories
 # -------------------------------------------------------------------
-mkdir -p "$STEAMCMD_DIR" "$SERVER_FILES_DIR" "$PROTON_DIR"
+mkdir -p "$STEAMCMD_DIR" "$SERVER_FILES_DIR" "$PROTON_DIR" "$CONFIG_DIR"
 
 # -------------------------------------------------------------------
 # SteamCMD
@@ -82,8 +82,13 @@ fi
 # ARK server install / update
 # -------------------------------------------------------------------
 echo -e "${CYAN}Installing/updating ARK server...${RESET}"
-"$STEAMCMD_DIR/steamcmd.sh" +force_install_dir "$SERVER_FILES_DIR" +login anonymous +app_update 2430930 validate +quit
-
+"$STEAMCMD_DIR/steamcmd.sh" \
+  +force_install_dir "$SERVER_FILES_DIR" \
+  +login anonymous \
+  @sSteamCmdForcePlatformType windows \
+  +app_update 2430930 validate \
+  +quit
+	
 # -------------------------------------------------------------------
 # Proton prefix (one-time)
 # -------------------------------------------------------------------
@@ -105,7 +110,6 @@ echo -e "${CYAN}Next step:${RESET}"
 # -----------------------------
 # Create default config
 # -----------------------------
-mkdir -p "$CONFIG_DIR"
 if [ ! -f "$ENV_FILE" ]; then
 cat <<'EOF' > "$ENV_FILE"
 # ARK Survival Ascended configuration
