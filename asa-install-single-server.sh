@@ -6,14 +6,54 @@ export LANGUAGE=C.UTF-8
 
 set -e
 
-# Color definitions
-RED='\e[31m'
-GREEN='\e[32m'
-YELLOW='\e[33m'
-BLUE='\e[34m'
-MAGENTA='\e[35m'
-CYAN='\e[36m'
-RESET='\e[0m'
+# ===============================
+# Color palette (vibrant)
+# ===============================
+RESET='\033[0m'
+
+# Themed
+STEAM_COLOR='\033[38;5;214m'     # orange-yellow
+PROTON_COLOR='\033[38;5;208m'    # orange
+ARK_COLOR='\033[38;5;117m'       # sky blue
+SUCCESS_COLOR='\033[38;5;82m'    # bright green
+INFO_COLOR='\033[38;5;250m'      # light gray
+WARN_COLOR='\033[38;5;220m'      # warning yellow
+ERROR_COLOR='\033[38;5;196m'     # bright red
+SECTION_COLOR='\033[38;5;141m'   # purple
+
+
+log_section() {
+  echo -e "${SECTION_COLOR}\n== $1 ==${RESET}"
+}
+
+log_steam() {
+  echo -e "${STEAM_COLOR}[Steam]${RESET} $1"
+}
+
+log_proton() {
+  echo -e "${PROTON_COLOR}[Proton]${RESET} $1"
+}
+
+log_ark() {
+  echo -e "${ARK_COLOR}[ARK]${RESET} $1"
+}
+
+log_ok() {
+  echo -e "${SUCCESS_COLOR}✔ $1${RESET}"
+}
+
+log_info() {
+  echo -e "${INFO_COLOR}ℹ $1${RESET}"
+}
+
+log_warn() {
+  echo -e "${WARN_COLOR}⚠ $1${RESET}"
+}
+
+log_error() {
+  echo -e "${ERROR_COLOR}✖ $1${RESET}"
+}
+
 
 SERVICE_NAME="asa"
 
@@ -36,18 +76,18 @@ PROTON_DIR="$BASE_DIR/$PROTON_VERSION"
 STEAMCMD_URL="https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz"
 PROTON_URL="https://github.com/GloriousEggroll/proton-ge-custom/releases/download/$PROTON_VERSION/$PROTON_VERSION.tar.gz"
 
-echo -e "${BLUE}== ARK Survival Ascended installer (single server) ==${RESET}"
+log_ark "ARK Survival Ascended – Single Server Installer"
 
 # -------------------------------------------------------------------
 # Dependencies
 # -------------------------------------------------------------------
-echo -e "${MAGENTA}Installing dependencies...${RESET}"
+log_section "Installing dependencies..."
 dpkg --add-architecture i386
 dependencies=("wget" "tar" "grep" "libc6:i386" "libstdc++6:i386" "libncursesw6:i386" "python3" "libfreetype6:i386" "libfreetype6:amd64" "cron")
 
 apt update
 apt install -y "${dependencies[@]}"
-echo -e "${GREEN}Installed dependencies...${RESET}"
+log_ok "Installed dependencies..."
 
 # -------------------------------------------------------------------
 # Directories
@@ -60,46 +100,46 @@ mkdir -p "$STEAMCMD_DIR" "$SERVER_FILES_DIR" "$PROTON_DIR" "$CONFIG_DIR"
 export HOME="$BASE_DIR"
 mkdir -p "$HOME/.steam"
 if [ ! -f "$STEAMCMD_DIR/steamcmd.sh" ]; then
-    echo -e "${CYAN}Downloading SteamCMD...${RESET}"
+    log_steam "Downloading SteamCMD..."
     wget -q -O "$STEAMCMD_DIR/steamcmd_linux.tar.gz" "$STEAMCMD_URL"
     tar -xzf "$STEAMCMD_DIR/steamcmd_linux.tar.gz" -C "$STEAMCMD_DIR"
     rm "$STEAMCMD_DIR/steamcmd_linux.tar.gz"
-		echo -e "${GREEN}Installed SteamCMD...${RESET}"
+		log_ok "Installed SteamCMD..."
 else
-    echo -e "${GREEN}SteamCMD already installed.${RESET}"
+    log_ok "SteamCMD already installed."
 fi
 
 if [ ! -f "$STEAMCMD_DIR/.bootstrapped" ]; then
-    echo -e "${CYAN}Initializing SteamCMD (first run)...${RESET}"
+    log_steam "Initializing SteamCMD (first run)..."
     "$STEAMCMD_DIR/steamcmd.sh" +quit
     touch "$STEAMCMD_DIR/.bootstrapped"
-		echo -e "${CYAN}Initialized SteamCMD (first run)...${RESET}"
+		log_ok "Initialized SteamCMD (first run)..."
 fi
 
 # -------------------------------------------------------------------
 # Proton GE
 # -------------------------------------------------------------------
 if [ ! -d "$PROTON_DIR/files" ]; then
-    echo -e "${YELLOW}Downloading Proton GE...${RESET}"
+    log_proton "Downloading Proton GE..."
     wget -q -O "$PROTON_DIR/$PROTON_VERSION.tar.gz" "$PROTON_URL"
     tar -xzf "$PROTON_DIR/$PROTON_VERSION.tar.gz" -C "$PROTON_DIR" --strip-components=1
     rm "$PROTON_DIR/$PROTON_VERSION.tar.gz"
-		echo -e "${GREEN}Installed Proton GE...${RESET}"
+		log_ok "Installed Proton GE..."
 else
-    echo -e "${GREEN}Proton already installed.${RESET}"
+    log_ok "Proton already installed."
 fi
 
 # -------------------------------------------------------------------
 # ARK server install / update
 # -------------------------------------------------------------------
-echo -e "${CYAN}Installing ARK server...${RESET}"
+log_ark "Installing ARK server..."
 "$STEAMCMD_DIR/steamcmd.sh" \
   +@sSteamCmdForcePlatformType windows \
   +force_install_dir "$SERVER_FILES_DIR" \
   +login anonymous \
   +app_update 2430930 validate \
   +quit
-echo -e "${GREEN}Installed ARK server...${RESET}"
+log_ok "Installed ARK server..."
 # -------------------------------------------------------------------
 # Proton prefix (one-time)
 # -------------------------------------------------------------------
@@ -107,18 +147,18 @@ echo -e "${GREEN}Installed ARK server...${RESET}"
 PROTON_PREFIX="$SERVER_FILES_DIR/steamapps/compatdata/2430930"
 
 if [ ! -d "$PROTON_PREFIX/pfx" ]; then
-    echo -e "${CYAN}Initializing Proton prefix...${RESET}"
+    log_proton "Initializing Proton prefix..."
     mkdir -p "$PROTON_PREFIX"
     cp -r "$PROTON_DIR/files/share/default_pfx/." "$PROTON_PREFIX/"
-    echo -e "${GREEN}Initialized Proton prefix...${RESET}"
+    log_ok "Initialized Proton prefix..."
 else
-    echo -e "${GREEN}Proton prefix already initialized.${RESET}"
+    log_ok "Proton prefix already initialized."
 fi
 
 # -----------------------------
 # Create default config
 # -----------------------------
-echo -e "${CYAN}Creating default config file...${RESET}"
+log_section "Creating default config file..."
 if [ ! -f "$ENV_FILE" ]; then
 cat <<'EOF' > "$ENV_FILE"
 # ARK Survival Ascended configuration
@@ -142,11 +182,11 @@ CLUSTER_DIR="/opt/asa/cluster"
 EXTRA_ARGS="-NoBattlEye -crossplay"
 EOF
 fi
-echo -e "${GREEN}Created default config file...${RESET}"
+log_ok "Created default config file..."
 # -----------------------------
 # Start script
 # -----------------------------
-echo -e "${CYAN}Creating start script...${RESET}"
+log_section "Creating start script..."
 
 cat <<'EOF' > "$START_SCRIPT"
 #!/bin/bash
@@ -206,11 +246,11 @@ exec "$PROTON_DIR/proton" run \
 EOF
 
 chmod +x "$START_SCRIPT"
-echo -e "${GREEN}Created start script...${RESET}"
+log_ok "Created start script..."
 # -----------------------------
 # systemd service
 # -----------------------------
-echo -e "${CYAN}Creating service...${RESET}"
+log_section "Creating service..."
 cat <<EOF > "$SERVICE_FILE"
 [Unit]
 Description=ARK Survival Ascended Server
@@ -230,16 +270,15 @@ KillSignal=SIGTERM
 [Install]
 WantedBy=multi-user.target
 EOF
-echo -e "${GREEN}Created service...${RESET}"
+log_ok "Created service..."
 
 # Reload systemd and enable service
 systemctl daemon-reexec
 systemctl daemon-reload
 systemctl enable --now "$SERVICE_NAME"
 
-echo -e "${GREEN}Installation complete.${RESET}"
-echo
-echo -e "${CYAN}Service status:${RESET}"
+log_ok "Installation complete."
+log_ark "Service status:"
 systemctl status "$SERVICE_NAME" --no-pager
 
 
