@@ -1,0 +1,8 @@
+Run on host : 
+	mkdir -p /var/lib/asa-cluster
+	chown -R 100000:100000 /var/lib/asa-cluster
+	chmod -R 775 /var/lib/asa-cluster
+
+Pass your new folder to your 2 lxc : 
+	pct set 100 -mp0 /var/lib/asa-cluster,mp=/opt/asa/cluster
+	pct set 101 -mp0 /var/lib/asa-cluster,mp=/opt/asa/cluster

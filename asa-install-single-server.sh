@@ -231,6 +231,7 @@ exec "$PROTON_DIR/proton" run \
   -WinLiveMaxPlayers=$MAX_PLAYERS \
   -Port=$GAME_PORT \
   $MOD_ARG \
+	$CLUSTER_ARGS \
   -QueryPort=$QUERY_PORT \
   -RCONPort=$RCON_PORT \
   -NoSteamClient \
