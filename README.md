@@ -1,31 +1,23 @@
 <div align="center">
-
-\`\`\`
-                                   _.---.._
-                      _        _.-' \  \    ''-.
-                    .' '-,   .-'    |  |       \
-                   /     \  |       |   \       \
-                  /    __ \. \      |    \       \
-                 /    /  \ \ |     /     |        \
-                /    /    \ \|    |      |         \
-               /    /      \     /       |          \
-              /    /        \   /        |           \
-             /    /          \_/         |            \
-            /    /                       |             \
-           /    /                        |              \
-          /    /                         |               \
-\`\`\`
-
 # 🦖 ARK: Survival Ascended – Single Server Installer (Proxmox / LXC)
 
 This repository provides a **Bash script** to install and run **ARK: Survival Ascended** on Linux using **SteamCMD + Proton GE**, fully managed by **systemd**.
 
 The main objective is to run **one ARK server per LXC container** in order to achieve:
-
-- 🧱 Clean isolation
-- 📉 Easy CPU / RAM / disk limits
-- 💾 Predictable disk usage (less than 10 GB per server)
-- 📦 Simple scaling on Proxmox
+<ul>
+	<li>
+		🧱 Clean isolation
+	</li>
+	<li>
+		📉 Easy CPU / RAM / disk limits
+	</li>
+	<li>
+		💾 Predictable disk usage (less than 20 GB per server)
+	</li>
+	<li>
+		📦 Simple scaling on Proxmox
+	</li>
+</ul>
 
 This project is designed for **self-hosters**, **homelab setups**, and **Proxmox users**.
 
