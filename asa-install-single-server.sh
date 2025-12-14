@@ -22,8 +22,8 @@ ERROR_COLOR='\033[38;5;196m'     # bright red
 SECTION_COLOR='\033[38;5;141m'   # purple
 
 
-log_section() {
-  echo -e "${SECTION_COLOR}\n== $1 ==${RESET}"
+log_file() {
+  echo -e "${SECTION_COLOR}[Files]${RESET} $1"
 }
 
 log_steam() {
@@ -81,7 +81,7 @@ log_ark "ARK Survival Ascended – Single Server Installer"
 # -------------------------------------------------------------------
 # Dependencies
 # -------------------------------------------------------------------
-log_section "Installing dependencies..."
+log_file "Installing dependencies..."
 dpkg --add-architecture i386
 dependencies=("wget" "tar" "grep" "libc6:i386" "libstdc++6:i386" "libncursesw6:i386" "python3" "libfreetype6:i386" "libfreetype6:amd64" "cron")
 
@@ -158,7 +158,7 @@ fi
 # -----------------------------
 # Create default config
 # -----------------------------
-log_section "Creating default config file..."
+log_file "Creating default config file..."
 if [ ! -f "$ENV_FILE" ]; then
 cat <<'EOF' > "$ENV_FILE"
 # ARK Survival Ascended configuration
@@ -186,7 +186,7 @@ log_ok "Created default config file..."
 # -----------------------------
 # Start script
 # -----------------------------
-log_section "Creating start script..."
+log_file "Creating start script..."
 
 cat <<'EOF' > "$START_SCRIPT"
 #!/bin/bash
@@ -250,7 +250,7 @@ log_ok "Created start script..."
 # -----------------------------
 # systemd service
 # -----------------------------
-log_section "Creating service..."
+log_file "Creating service..."
 cat <<EOF > "$SERVICE_FILE"
 [Unit]
 Description=ARK Survival Ascended Server
