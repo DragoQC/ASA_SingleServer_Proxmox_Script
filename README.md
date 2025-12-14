@@ -3,6 +3,8 @@
 
 This repository provides a **Bash script** to install and run **ARK: Survival Ascended** on Linux using **SteamCMD + Proton GE**, fully managed by **systemd**.
 
+</div>
+
 The main objective is to run **one ARK server per LXC container** in order to achieve:
 <ul>
 	<li>
@@ -184,5 +186,4 @@ journalctl -u asa -f
 - Wildcard – ARK: Survival Ascended
 - You – for hosting your own servers
 
-</div>
 
