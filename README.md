@@ -1,3 +1,21 @@
+<div align="center">
+
+\`\`\`
+                                   _.---.._
+                      _        _.-' \  \    ''-.
+                    .' '-,   .-'    |  |       \
+                   /     \  |       |   \       \
+                  /    __ \. \      |    \       \
+                 /    /  \ \ |     /     |        \
+                /    /    \ \|    |      |         \
+               /    /      \     /       |          \
+              /    /        \   /        |           \
+             /    /          \_/         |            \
+            /    /                       |             \
+           /    /                        |              \
+          /    /                         |               \
+\`\`\`
+
 # 🦖 ARK: Survival Ascended – Single Server Installer (Proxmox / LXC)
 
 This repository provides a **Bash script** to install and run **ARK: Survival Ascended** on Linux using **SteamCMD + Proton GE**, fully managed by **systemd**.
@@ -173,4 +191,6 @@ journalctl -u asa -f
 - GloriousEggroll – Proton GE
 - Wildcard – ARK: Survival Ascended
 - You – for hosting your own servers
+
+</div>
 
