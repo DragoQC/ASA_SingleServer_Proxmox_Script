@@ -40,6 +40,7 @@ This project is designed for **self-hosters**, **homelab setups**, and **Proxmox
 Run the installer directly:
 > Run it inside Debian 13 LXC
 ```bash
+apt update && apt upgrade -y && apt install curl -y
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/DragoQC/ASA_SingleServer_Proxmox_Script/main/asa-install-single-server.sh)"
 ```
 
