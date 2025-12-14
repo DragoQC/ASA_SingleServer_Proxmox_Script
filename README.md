@@ -44,7 +44,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/DragoQC/ASA_SingleServer
 - Automatic restart on crash
 - Automatic update on service restart
 - Optional cluster support
-- Mod support via command-line
+- Mod support via config file
 - Clean and simple file layout
 - Example `Game.ini` and `GameUserSettings.ini` included
 
