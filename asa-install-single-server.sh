@@ -213,7 +213,6 @@ fi
 # -----------------------------
 CONFIG_EXTRA_ARGS=""
 if [ -n "$EXTRA_ARGS" ]; then
-  mkdir -p "$EXTRA_ARGS"
   CONFIG_EXTRA_ARGS=$EXTRA_ARGS
 fi
 
