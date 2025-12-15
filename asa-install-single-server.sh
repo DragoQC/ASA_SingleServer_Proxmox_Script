@@ -209,6 +209,16 @@ if [ -n "$CLUSTER_ID" ]; then
 fi
 
 # -----------------------------
+# Optional Extra args
+# -----------------------------
+CONFIG_EXTRA_ARGS=""
+if [ -n "$EXTRA_ARGS" ]; then
+  mkdir -p "$EXTRA_ARGS"
+  CONFIG_EXTRA_ARGS=$EXTRA_ARGS
+fi
+
+
+# -----------------------------
 # Proton environment
 # -----------------------------
 export STEAM_COMPAT_DATA_PATH="$SERVER_FILES_DIR/steamapps/compatdata/2430930"
@@ -243,7 +253,8 @@ exec "$PROTON_DIR/proton" run \
   -log \
   -server \
   -nosteamclient \
-  -game	
+  -game	\
+	$CONFIG_EXTRA_ARGS
 EOF
 
 chmod +x "$START_SCRIPT"
