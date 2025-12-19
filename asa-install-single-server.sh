@@ -268,6 +268,7 @@ Description=ARK Survival Ascended Server
 After=network.target
 
 [Service]
+TimeoutStartSec=0
 Type=simple
 WorkingDirectory=/opt/asa
 ExecStartPre=/opt/asa/steamcmd/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir /opt/asa/server-files +login anonymous +app_update 2430930 validate +quit
